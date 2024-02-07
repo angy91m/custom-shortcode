@@ -58,7 +58,9 @@ function custom_shortcode($str="", $avail_blocks = [], $excluded_blocks=[], $ava
 		if (preg_match($regx, $tok, $matches, PREG_OFFSET_CAPTURE)) {
 			$len = strlen($matches[0][0]);
 			$pos = $matches[0][1];
-			$res .= substr($tok,0, $pos);
+			if (!$exclude_block) {
+				$res .= substr($tok,0, $pos);
+			}
 			$tok = substr($tok,$pos+$len);
 			$arguments = parse_arguments(trim($matches[4][0]));
 			$block_name = $matches[1][0];
